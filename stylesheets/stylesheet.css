@@ -15,6 +15,7 @@ Small Device Styles
 @media screen and (max-width: 480px) {
   body {
     font-size:14px;
+    overflow: hidden;
   }
 
   #downloads {
