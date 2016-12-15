@@ -12,22 +12,61 @@
     <body>
         <section class="job-details">
             <section class="de-intro">
-                <p class="job-title">PHP开发工程师</p>
+                <p class="job-title">{{PositionName}}</p>
                 <section class="job-summary">
-                    <span class="summary-list mo">4000-6000元/月</span>
-                    <span class="summary-list add">广州</span>
-                    <span class="summary-list type">全职</span>
-                    <span class="summary-list sum">招聘若干</span>
-                    <span class="summary-list time">2015-08-09发布</span>
+                    <span class="summary-list"><i class="mo"></i>{{SalaryRange}}</span>
+                    <span class="summary-list"><i class="add"></i>{{CityName}}</span>
+                    <span class="summary-list"><i class="type"></i>{{PositionTypeName}}</span>
+                    <span class="summary-list"><i class="sum"></i>招聘{{RecruitCount}}人</span>
+                    <span class="summary-list"><i class="time"></i>{{DeployTime}}发布</span>
                 </section>
                 <section class="job-tags">
-                    <span class="tag-list">妹</span>
-                    <span class="tag-list">妹子</span>
-                    <span class="tag-list">妹子多</span>
-                    <span class="tag-list">妹子多啊</span>
-                    <span class="tag-list">妹子多啊啊</span>
+                    <!-- {{each Album}} -->
+                        <span class="tag-list"><i class="tag-icon"></i><em>{{Tags}}</em></span>
+                    <!-- {{/each}} -->
                 </section>
             </section>
+            <section class="job-com">
+                <img src="{{EtpLogoUrl}}" class="job-com-logo">
+                <section class="job-com-into">
+                    <p class="job-com-name">
+                        <a href="" class="min-width">{{EnterpriseName}}</a>
+                        {{if EtpCertificationStatus === 3}}
+                            <span class="icon"></span>
+                        {{/if}}
+                    </p>
+                    <p class="intro">{{IndustryIdNames}}</p>
+                </section>
+            </section>
+            <article class="job-position">
+                <p class="title">职位要求</p>
+                <section class="demond">
+                    <section class="demond-list">
+                        <span class="label">学历要求：</span>
+                        <span class="label-content">{{DegreeNames}}</span>
+                    </section>
+                    <section class="demond-list">
+                        <span class="label">专业要求：</span>
+                        <span class="label-content">{{MajorNames}}</span>
+                    </section>
+                    <section class="demond-list">
+                        <span class="label">学校级别：</span>
+                        <span class="label-content">{{}}</span>
+                    </section>
+                    <section class="demond-list">
+                        <span class="label">学校城市：</span>
+                        <span class="label-content">{{SchoolCityNames}}</span>
+                    </section>
+                </section>
+            </article>
+            <article class="job-position">
+                <p class="title job">工作内容</p>
+                <section class="demond">
+                    <section class="sum">
+                        {{PosDescription}}
+                    </section>
+                </section>
+            </article>
         </section>
         <script type="text/javascript" src="job.js" charset="utf-8"></script>
     </body>
