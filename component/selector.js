@@ -217,7 +217,9 @@
             startYear: 1980,                 //如果dataType为date类型则以下三个参数可填
             endYear: new Date().getFullYear(),
             defaultDate: 198801,
-            callback: null
+            callback: null,
+            // 处理弹层出现页面滚动的问题
+            layerCallback: null
         };
         var _this = $(this);
         opts = $.extend(true, {}, opts, options);
@@ -295,6 +297,7 @@
 
         obj.find(".fl").on('click', function () {
             selectHide();
+            typeof (opts.layerCallback) == 'function' ? opts.layerCallback() : null;
         });
         obj.find(".fr").on('click', function () {
             if (opts.moreSelect) {
@@ -345,6 +348,7 @@
         });
         overLay.on('click', function () {
             selectHide();
+            typeof (opts.layerCallback) == 'function' ? opts.layerCallback() : null;
         });
         _this.on('click', function () {
             var dataId = $('input[name="' + _this.attr("id") + '"]').val();
