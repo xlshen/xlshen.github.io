@@ -34,7 +34,7 @@ button{border: none;}
 .double-selector .double-body ul li {line-height:40px;height:40px;overflow:hidden;padding:0 30px;color:#333;}
 .double-selector .double-body ul li.active {color:#04c875}
 
-.double-selector .popup-header,.single-selector .popup-header {background:#43c674;}
-.double-selector .popup-header button,.single-selector .popup-header button {font-size:16px;background:#43c674;width:auto;}
-.double-selector .double-body .reticle,.single-selector .single-body .reticle {left:5%;width:90%;border:1px solid #43c674;}
-.double-selector .double-body ul li.active,.single-selector .single-body ul li.active {color:#43c674;}
+.double-selector .popup-header,.single-selector .popup-header {background:#52c168;}
+.double-selector .popup-header button,.single-selector .popup-header button {font-size:16px;background:#52c168;width:auto;}
+.double-selector .double-body .reticle,.single-selector .single-body .reticle {left:5%;width:90%;border:1px solid #52c168;}
+.double-selector .double-body ul li.active,.single-selector .single-body ul li.active {color:#52c168;}
