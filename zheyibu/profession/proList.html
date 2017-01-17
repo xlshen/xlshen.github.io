@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta charset="UTF-8">
+        <meta content="yes" name="apple-mobile-web-app-capable" />
+        <meta content="yes" name="apple-touch-fullscreen" />
+        <meta content="telephone=no,email=no" name="format-detection" />
+        <title>profession</title>
+        <link rel="stylesheet" href="component/selector.css">
+        <script type="text/javascript" src="../../scripts/jquery.min.js" charset="utf-8"></script>
+        <script type="text/javascript" src="proitem.js"></script>
+    </head>
+    <body>
+        <header class="caption">
+            <img src="images/backforward.png" alt="" class="backgo" width="20" height="20">
+            <p class="title ellipsis">信息管理与信息系统专业对口的职位</p>
+        </header>
+        <section class="proList cf">
+            <p class="title"></p>
+            <section class="filter">
+                <ul class="fill">
+                    <li class="fill-list ellipsis" id="city">所在城市</li>
+                    <li class="fill-list ellipsis" id="jnature">工作性质</li>
+                    <li class="fill-list ellipsis" id="funcs">职能类别</li>
+                    <li class="fill-list ellipsis" id="salary">薪资范围</li>
+                </ul>
+                <input type="hidden" name="city" data-sel="0-0">
+                <input type="hidden" name="jnature" value="0">
+                <input type="hidden" name="funcs" value="0">
+                <input type="hidden" name="salary" value="0">
+            </section>
+            <section class="job">
+                <ul class="jobpage" id="jobpage"></ul>
+                <p class="load-more">正在加载更多...</p>
+            </section>
+            <section class="go-top">
+                <img src="images/gotop.png" class="gotop dN" width="45" height="45">
+            </section>
+        </section>
+        <script type="text/javascript" src="../../scripts/common.js"></script>
+        <script type="text/javascript" src="component/jquery.waypoints.min.js"></script>
+        <script type="text/javascript" src="component/base-data.js"></script>
+        <script type="text/javascript" src="component/selector.js"></script>
+    </body>
+</html>
