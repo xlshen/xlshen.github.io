@@ -161,6 +161,9 @@
                 case "touchend":
                   output.innerHTML = "Touch ended ( " + event.changedTouches[0].clientX + ", " + event.changedTouches[0].clientY + " ).";
                   break;
+              case "touchcancel":
+                output.innerHTML = "Touch ended ( " + event.changedTouches[0].clientX + ", " + event.changedTouches[0].clientY + " ).";
+                break;
                 case "touchmove":
                   event.preventDefault();
                   output.innerHTML = "Touch moved ( " + event.changedTouches[0].clientX + ", " + event.changedTouches[0].clientY + " ).";
@@ -171,6 +174,7 @@
           Event.addHandle(document, "touchstart", handleTouchEvent);
           Event.addHandle(document, "touchmove", handleTouchEvent);
           Event.addHandle(document, "touchend", handleTouchEvent);
+          Event.addHandle(document, "touchcancel", handleTouchEvent);
      </script>
 </body>
 </html>
