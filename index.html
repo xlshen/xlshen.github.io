@@ -155,7 +155,6 @@
               var output = document.getElementById("output");
               switch(event.type){
                 case "touchstart":
-                  event.preventDefault();
                   output.innerHTML = "Touch started ( " + event.touches[0].clientX + ", " + event.touches[0].clientY + " ).";
                   break;
                 case "touchend":
@@ -165,11 +164,6 @@
                   event.preventDefault();
                   output.innerHTML = "Touch moved ( " + event.changedTouches[0].clientX + ", " + event.changedTouches[0].clientY + " ).";
                   break;
-              case "touchcancel":
-                event.preventDefault();
-                output.innerHTML = "touchcancel ( " + event.changedTouches[0].clientX + ", " + event.changedTouches[0].clientY + " ).";
-                break;
-              }
             }
           }
           Event.addHandle(document, "touchstart", handleTouchEvent);
