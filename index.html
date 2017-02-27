@@ -155,6 +155,7 @@
               var output = document.getElementById("output");
               switch(event.type){
                 case "touchstart":
+                  event.preventDefault();
                   output.innerHTML = "Touch started ( " + event.touches[0].clientX + ", " + event.touches[0].clientY + " ).";
                   break;
                 case "touchend":
