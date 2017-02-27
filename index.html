@@ -164,11 +164,12 @@
                   event.preventDefault();
                   output.innerHTML = "Touch moved ( " + event.changedTouches[0].clientX + ", " + event.changedTouches[0].clientY + " ).";
                   break;
+              }
             }
           }
-          Event.addHandle(document, "touchstart", handleTouchEvent);
-          Event.addHandle(document, "touchmove", handleTouchEvent);
-          Event.addHandle(document, "touchend", handleTouchEvent);
+          Event.addHandle(d, "touchstart", handleTouchEvent);
+          Event.addHandle(d, "touchmove", handleTouchEvent);
+          Event.addHandle(d, "touchend", handleTouchEvent);
      </script>
 </body>
 </html>
