@@ -1,0 +1,180 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style media="screen">
+        #request{
+            position: relative;
+            width: 300px;
+            height: 100px;
+            background-color: #f2f2f2;
+            text-align: center;
+            line-height: 100px;
+        }
+        #contextMenu{
+            width: 200px;
+            height: 100px;
+            background-color: #ddd;
+        }
+        #menu{
+            position: absolute;
+            visibility: hidden;
+            background-color: silver;
+        }
+    </style>
+    <script type="text/javascript" src="external.js"></script>
+    <link rel="stylesheet" href="external.css">
+</head>
+<body>
+     <ul id="list">
+         <li class="sel">1</li>
+         <li class="sel">2</li>
+         <li class="sel">3</li>
+         <li class="self"></li>
+         <li class="self sel" data-setId="idset"></li>
+     </ul>
+     <div id="request">
+         placeHolder
+     </div>
+     <textarea name="name" rows="8" cols="80" id="areaInput"></textarea>
+     <div id="contextMenu"></div>
+     <ul id="menu">
+         <li><a href="http://www.baidu.com">这是第一个</a></li>
+         <li><a href="http://www.zheyibu.com">这是第二个</a></li>
+         <li><a href="">这是第三个</a></li>
+     </ul>
+     <div id="output"></div>
+     <script type="text/javascript">
+         var Event = {
+            addHandle: function(element, type, handler){
+              if(element.addEventListener){
+                element.addEventListener(type, handler, false);
+              }else if(element.attachEvent){
+                element.attachEvent("on" + type, handler);
+              }else{
+                element["on" + type] = handler;
+              }
+            },
+            removeHandler: function(element, type, handler){
+              if(element.removeEventListener){
+                element.removeEventListener(type, handler, false);
+              }else if(element.detachEvent){
+                element.detach("on" + type, handler);
+              }else{
+                element["on" + type] = null;
+              }
+            },
+            getEvent: function(event){
+              return event ? event : window.event;
+            },
+            getTarget: function(event){
+              return event.target ? event.target : event.srcElement;
+            },
+            preventDefault: function(event){
+              if(event.preventDefault){
+                event.preventDefault();
+              }else{
+                event.returnValue = false;
+              }
+            },
+            stopPropagation: function(event){
+              if(event.stopPropagation){
+                event.stopPropagation();
+              }else{
+                event.cancelBubble = true;
+              }
+            }
+          }
+        var div = document.getElementById("list");
+        div.addEventListener("click", function(event){
+            console.log("Coordinate: " + event.clientX + ", " + event.clientY);
+        }, false);
+        div.addEventListener("click", function(event){
+            console.log("Coordinate: " + event.pageX + ", " + event.pageY);
+        }, false);
+        var start = null;
+        var d = document.getElementById('request');
+        function translate(timestamp){
+            if (start === null) start = timestamp;
+              var progress = timestamp - start;
+              d.style.left = Math.min(progress/10, 200) + "px";
+              if (progress < 2000) {
+                requestAnimationFrame(translate);
+              }
+        }
+        requestAnimationFrame(translate);
+        // textInput测试数据
+        var area = document.getElementById("areaInput");
+        area.addEventListener("textInput", function(event){
+            console.log(event.data);
+        }, false);
+        var isSupported = document.implementation.hasFeature("MutationEvents", "2.0");
+
+        window.addEventListener("load", function(event) {
+            var contextMenu = document.getElementById("contextMenu");
+            Event.addHandle(contextMenu, "contextmenu", function(event){
+                event = Event.getEvent(event);
+                Event.preventDefault(event); // 阻止默认行为
+
+                var menu = document.getElementById("menu");
+                menu.style.left = event.clientX + "px";
+                menu.style.top = event.clientY + "px";
+                menu.style.visibility = "visible";
+            });
+            Event.addHandle(document, "click", function(event){
+                document.getElementById("menu").style.visibility = "hidden";
+            });
+        }, false);
+        Event.addHandle(window, "beforeunload", function(event){
+            event = Event.getEvent(event);
+            var message = "I'm going to go.";
+            event.returnValue = message;
+            return message;
+        });
+        Event.addHandle(window, "DOMContentLoaded", function(event){
+            event = Event.getEvent(event);
+            console.log("DOMContentLoaded!");
+        });
+
+        var showCount = 0;
+        Event.addHandle(window, "pageshow", function (event) {
+            event = Event.getEvent(event);
+            showCount ++;
+            console.log("ShowCount fired " + showCount + " times. Persisted ? " + event.persisted);
+        });
+        Event.addHandle(window, "pagehide", function (event) {
+            event = Event.getEvent(event);
+            showCount ++;
+            console.log("Showhide Persisted ? " + event.persisted);
+        });
+
+        function handleTouchEvent(event){
+            // 只跟踪一次触摸
+            if(event.touches.length === 1){
+              var output = document.getElementById("output");
+              switch(event.type){
+                case "touchstart":
+                  event.preventDefault();
+                  output.innerHTML = "Touch started ( " + event.touches[0].clientX + ", " + event.touches[0].clientY + " ).";
+                  break;
+                case "touchend":
+                  output.innerHTML = "Touch ended ( " + event.changedTouches[0].clientX + ", " + event.changedTouches[0].clientY + " ).";
+                  break;
+                case "touchmove":
+                  event.preventDefault();
+                  output.innerHTML = "Touch moved ( " + event.changedTouches[0].clientX + ", " + event.changedTouches[0].clientY + " ).";
+                  break;
+              case "touchcancel":
+                event.preventDefault();
+                output.innerHTML = "touchcancel ( " + event.changedTouches[0].clientX + ", " + event.changedTouches[0].clientY + " ).";
+                break;
+              }
+            }
+          }
+          Event.addHandle(document, "touchstart", handleTouchEvent);
+          Event.addHandle(document, "touchmove", handleTouchEvent);
+          Event.addHandle(document, "touchend", handleTouchEvent);
+     </script>
+</body>
+</html>
