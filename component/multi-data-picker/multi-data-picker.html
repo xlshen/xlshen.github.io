@@ -9,7 +9,7 @@
     <script src="base-data.js" charset="utf-8"></script>
 </head>
 <body>
-    <input type="text" id="selector" value="北京">
+    <input type="text" id="selector" value="北京" readonly>
     <input type="hidden" id="hidden_selector" value="1001">
     <span>设置可选城市上限：</span><input type="text" class="set_limit_num">
     <script type="text/javascript">
@@ -226,11 +226,7 @@
                     // 2. 二级数据事件：通过是否有checked决定处理方法
                     else if(event.target.classList.contains("level-two")){
                         var dataName = event.target.textContent;
-                        // 如果限制数据select_num_limit,提示
-                        if(_this._get_selected_data().selected_id.length == _this.select_num_limit){
-                          alert("选择以达到最大值：" + _this.select_num_limit);
-                          return ;
-                        }
+
                         // 判断当前元素是否选中
                         if(event.target.classList.contains("checked")){
                             event.target.className = "level-two";
@@ -241,11 +237,14 @@
                             // 更新选中城市
                             _this._rerender_selected_data("delete", dataId);
                         }else{
-                            event.target.className = "level-two checked";
                             // 区分是否是选中“全部二级数据”
                             if(dataId.length === 4){
                                 _this._level_two_toggleClass("lock");
+                            }else if(_this._get_selected_data().selected_id.length == _this.select_num_limit){
+                                alert("选择以达到最大值：" + _this.select_num_limit);
+                                return ;
                             }
+                            event.target.className = "level-two checked";
                             // 更新选中城市
                             _this._rerender_selected_data("add", dataId, dataName);
                         }
