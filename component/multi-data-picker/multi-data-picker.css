@@ -11,7 +11,7 @@ body,html{height:100%;font:14px/20px "Microsoft YaHei";box-sizing:border-box}
 .selected{flex:1}
 .selected .selected-item{display:inline-block;padding:0 4px}
 .submit{padding:0 4px}
-.picker-container{position:relative;display:flex;height:-webkit-calc(100% - 1.5em);height:-moz-calc(100% - 1.5em);height:-ms-calc(100% - 1.5em);height:calc(100% - 1.5em)}
+.picker-container{position:relative;display:flex;height:-webkit-calc(100% - 2.5em);height:-moz-calc(100% - 2.5em);height:-ms-calc(100% - 2.5em);height:calc(100% - 2.5em)}
 .data-level{flex:1;display:flex}
 .picker-container .data-level-one{flex:1;overflow-y:scroll}
 .picker-container .data-level-two{flex:2;overflow-y:scroll}
