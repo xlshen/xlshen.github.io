@@ -230,24 +230,27 @@
 
                         // 判断当前元素是否选中
                         if(event.target.classList.contains("checked")){
-                            event.target.className = "level-two";
+
+                             // 更新选中城市
+                            _this._rerender_selected_data("delete", dataId);
+
                             // 区分是否是选中“全部二级数据”
                             if(dataId.length === 4){
                                 _this._level_two_toggleClass("unlock");
                             }
-                            // 更新选中城市
-                            _this._rerender_selected_data("delete", dataId);
+                           
+                            event.target.className = "level-two";
                         }else{
+                            // 更新选中城市
+                            if(_this._rerender_selected_data("add", dataId, dataName) === false){
+                                return false;
+                            }
+
                             // 区分是否是选中“全部二级数据”
                             if(dataId.length === 4){
                                 _this._level_two_toggleClass("lock");
-                            }else if(_this._get_selected_data().selected_id.length == _this.select_num_limit){
-                                alert("选择以达到最大值：" + _this.select_num_limit);
-                                return ;
                             }
                             event.target.className = "level-two checked";
-                            // 更新选中城市
-                            _this._rerender_selected_data("add", dataId, dataName);
                         }
                     // 3.选中数据事件：点击直接删除
                     }else if(event.target.classList.contains("selected-item")){
@@ -327,6 +330,11 @@
                                 _this._delete_selected_element(value);
                                 _this._update_level_one_num("one", value, "delete");
                             });
+                        }
+                        // 设置点击上限值
+                        if(_this._get_selected_data().selected_id.length == _this.select_num_limit){
+                            alert("选择以达到最大值：" + _this.select_num_limit);
+                            return false;
                         }
                         // 增加选中数据
                         this._add_selected_element(dataId, dataName);
