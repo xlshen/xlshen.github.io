@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>multi_data_picker</title>
-    <link rel="stylesheet" href="multi-data-picker.css">
+    <link rel="stylesheet" href="Multi_data_picker.css">
     <script src="base-data.js" charset="utf-8"></script>
 </head>
 <body>
@@ -23,7 +23,7 @@
          * @param       {[Number]} select_num_limit   [选中数据的最大值]
          * @constructor
          */
-        function City_multi_picker(trigger_selector, hidden_selector, separator, data, select_num_limit){
+        function Multi_data_picker(trigger_selector, hidden_selector, separator, data, select_num_limit){
             // 存储一级数据id对应的二级选中数字 {1001: 1, 2001:1, 3001:3}
             this._level_one_to_selectedNum = {};
             // 存储一级数据id对应一级数据dom元素 {1001: DOM1, 2001: DOM2, 3001: DOM3}
@@ -60,8 +60,8 @@
             }
 
         }
-        City_multi_picker.prototype = {
-            constructor: City_multi_picker,
+        Multi_data_picker.prototype = {
+            constructor: Multi_data_picker,
             /**
              * [组件初始化入口方法：1.DOM加载 2.事件绑定] 
              */
@@ -238,7 +238,7 @@
                             if(dataId.length === 4){
                                 _this._level_two_toggleClass("unlock");
                             }
-                           
+
                             event.target.className = "level-two";
                         }else{
                             // 更新选中城市
@@ -462,7 +462,7 @@
         document.addEventListener("click", function(event){
           if(event.target.id == "selector"){
             var l_m = document.querySelector(".set_limit_num").value || 3;
-            new City_multi_picker("selector", "hidden_selector", ",", city, l_m);
+            new Multi_data_picker("selector", "hidden_selector", ",", city, l_m);
           }
         }, false);
     </script>
