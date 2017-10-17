@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!-- <script src="jQuery-3.1.1.js"></script> -->
+  <style media="screen">
+    *{
+      margin: 0;
+      padding: 0;
+      touch-action: none;
+    }
+    html, body{
+      height: 100%;
+      width: 100%;
+    }
+    .slide{
+      position: relative;
+      height: 100%;
+      width: 100%;
+      transition:transform .5s ease
+    }
+    .slide-left, .slide-right{
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 100%;;
+      background-color: #7cbf59
+    }
+    .slide-right{
+      left: 100%;
+      background-color: #52c168;
+    }
+    .slide-left .text, .slide-right .text{
+      position: relative;
+      text-align: center;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  </style>
+  <script src="index.js" charset="utf-8"></script>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-left">
+      <p class="text">This is the left slide.</p>
+    </div>
+    <div class="slide-right">
+      <p class="text">This is the right slide.</p>
+    </div>
+  </div>
+</body>
+</html>
