@@ -13,6 +13,7 @@ function Downslide(
   items,
   selectedName,
   selectedId,
+  target,
   targetElement,
   hiddenElement,
   callback
@@ -20,6 +21,7 @@ function Downslide(
   this.items = items;
   this.name = selectedName;
   this.id = selectedId;
+  this.target = target;
   this.targetElement = targetElement;
   this.hiddenElement = hiddenElement;
   this.callback = callback;
@@ -27,31 +29,31 @@ function Downslide(
   this.domNode = null;
   this.selectedDom = null;
   /**
-     * 数据初始化
-     */
+       * 数据初始化
+       */
   this._init(this.items, this.name, this.id);
 }
 Downslide.prototype = {
   constructor: Downslide,
   /**
-     * 初始化下拉框
-     * @param  {[Array]} items [初始化数据]
-     * @param  {[String]} name  [选中元素名称]
-     * @param  {[Number]} id    [选中元素id]
-     * @return {[DOM]} [DOM元素]
-     */
+       * 初始化下拉框
+       * @param  {[Array]} items [初始化数据]
+       * @param  {[String]} name  [选中元素名称]
+       * @param  {[Number]} id    [选中元素id]
+       * @return {[DOM]} [DOM元素]
+       */
   _init: function(items, name, id) {
     var template = this._template(items, name, id);
-    document.body.appendChild(template);
+    this.target.appendChild(template);
     this._setPosition();
     this._event();
   },
   /**
-     * [下拉框定位]
-     * @param  {[Array]} items [初始化数据]
-     * @param  {[String]} name  [选中元素名称]
-     * @param  {[Number]} id    [选中元素id]
-     */
+       * [下拉框定位]
+       * @param  {[Array]} items [初始化数据]
+       * @param  {[String]} name  [选中元素名称]
+       * @param  {[Number]} id    [选中元素id]
+       */
   _template: function(items, name, id) {
     var _this = this,
       name = name || "",
@@ -59,11 +61,11 @@ Downslide.prototype = {
       fragment = document.createDocumentFragment(),
       elementNode = this._createNode(1, "ul");
     /**
-         * @param  {[String]} value [description]
-         * @param  {[Number]} index [description]
-         * @return {[Node]} [DOM元素]
-         * 为了兼容IE8用for
-         */
+             * @param  {[String]} value [description]
+             * @param  {[Number]} index [description]
+             * @return {[Node]} [DOM元素]
+             * 为了兼容IE8用for
+             */
     if (id === "") {
       for (var index = 0; index < items.length; index++) {
         elementNode.appendChild(
@@ -92,19 +94,19 @@ Downslide.prototype = {
     return this.domNode;
   },
   /**
-     * [根据类型创建节点,并返回创建好的DOM内容]
-     * @param  {[Number]} type [1: element无textNode, 2: element包含textNode]
-     * @param {[String]} node [生成的节点类型]
-     * @param  {[String]} name [文本节点]
-     * @param  {[String]} id   [元素节点id属性，用来设置选中id]
-     * @param  {[String]} selected [标识选中状态：class值]
-     * @return {[Node]}          [生成的节点]
-     */
+       * [根据类型创建节点,并返回创建好的DOM内容]
+       * @param  {[Number]} type [1: element无textNode, 2: element包含textNode]
+       * @param {[String]} node [生成的节点类型]
+       * @param  {[String]} name [文本节点]
+       * @param  {[String]} id   [元素节点id属性，用来设置选中id]
+       * @param  {[String]} selected [标识选中状态：class值]
+       * @return {[Node]}          [生成的节点]
+       */
   _createNode: function(type, node, name, id, selected) {
     switch (type) {
       /**
-             * [最外层元素节点]
-             */
+                   * [最外层元素节点]
+                   */
       case 1:
         var element = document.createElement(node);
         element.id = "downslide-list";
@@ -112,8 +114,8 @@ Downslide.prototype = {
         return element;
         break;
       /**
-                 * [元素带文本节点,无选中状态]
-                 */
+                           * [元素带文本节点,无选中状态]
+                           */
       case 2:
         var element = document.createElement(node),
           textNode = document.createTextNode(name);
@@ -123,8 +125,8 @@ Downslide.prototype = {
         return element;
         break;
       /**
-                 * [元素带文本节点,选中状态]
-                 */
+                           * [元素带文本节点,选中状态]
+                           */
       case 3:
         var element = document.createElement(node),
           textNode = document.createTextNode(name);
@@ -140,8 +142,8 @@ Downslide.prototype = {
     }
   },
   /**
-     * [根据初始化节点，设置下拉框位置]
-     */
+       * [根据初始化节点，设置下拉框位置]
+       */
   _setPosition: function() {
     var style = null,
       height = null,
@@ -156,43 +158,29 @@ Downslide.prototype = {
     }
     height = style.height;
     width = style.width;
-    left = this._getLeft(this.targetElement);
-    top = this._getTop(this.targetElement);
     /**
-         * [设置元素位置]
-         */
-    this.domNode.style.top = parseInt(height) + top + "px";
-    this.domNode.style.left = left + "px";
+             * [设置元素位置]
+             */
+    this.domNode.style.top = parseInt(height) + "px";
+    this.domNode.style.left = "0px";
     this.domNode.style.width = width;
   },
-  //获取元素的纵坐标（相对于窗口）
-  _getTop: function(e) {
-    var offset = e.offsetTop;
-    if (e.offsetParent != null) offset += this._getTop(e.offsetParent);
-    return offset;
-  },
-  //获取元素的横坐标（相对于窗口）
-  _getLeft: function(e) {
-    var offset = e.offsetLeft;
-    if (e.offsetParent != null) offset += this._getLeft(e.offsetParent);
-    return offset;
-  },
   /**
-     * 下拉框事件处理
-     */
+       * 下拉框事件处理
+       */
   _event: function() {
     var _this = this,
       toggleFLag = true;
     /**
-         * [全局事件监听]
-         */
+             * [全局事件监听]
+             */
     this._addEvent(
       document,
       "click",
       function(e) {
         var e = e || window.event;
         var target = e.target || e.srcElement;
-        if (target.id === _this.targetElement.id) {
+        if (target.id === _this.targetElement.id && target.id) {
           _this._toggle(toggleFLag);
           toggleFLag = !toggleFLag;
           return false;
@@ -204,8 +192,8 @@ Downslide.prototype = {
       false
     );
     /**
-         * [domNode内部事件监听]
-         */
+             * [domNode内部事件监听]
+             */
     this._addEvent(
       this.domNode,
       "click",
@@ -227,12 +215,12 @@ Downslide.prototype = {
     );
   },
   /**
-     * [事件处理函数，兼容IE8]
-     * @param  {[Node]}   elm   [触发元素]
-     * @param  {[String]}   evType  [触发类型]
-     * @param  {Function}  fn  [触发事件函数]
-     * @param  {[Boolean]}   useCapture [冒泡阶段]
-     */
+       * [事件处理函数，兼容IE8]
+       * @param  {[Node]}   elm   [触发元素]
+       * @param  {[String]}   evType  [触发类型]
+       * @param  {Function}  fn  [触发事件函数]
+       * @param  {[Boolean]}   useCapture [冒泡阶段]
+       */
   _addEvent: function(elm, evType, fn, useCapture) {
     if (elm.addEventListener) {
       // W3C标准
@@ -247,9 +235,9 @@ Downslide.prototype = {
     }
   },
   /**
-     * [更新节点选中状态]
-     * @param  {[Node]} target [目标节点]
-     */
+       * [更新节点选中状态]
+       * @param  {[Node]} target [目标节点]
+       */
   _updateSelected: function(target) {
     // 更新样式
     this.selectedDom.className = "downslide-list-item";
@@ -258,14 +246,14 @@ Downslide.prototype = {
     this.selectedDom = target;
   },
   /**
-     * [下拉框显示]
-     */
+       * [下拉框显示]
+       */
   show: function() {
     this.domNode.style.display = "block";
   },
   /**
-     * 下拉框隐藏
-     */
+       * 下拉框隐藏
+       */
   hide: function() {
     this.domNode.style.display = "none";
   },
@@ -273,9 +261,9 @@ Downslide.prototype = {
     toggleFLag ? this.show() : this.hide();
   },
   /**
-     * 下拉框销毁
-     * 供外部函数调用
-     */
+       * 下拉框销毁
+       * 供外部函数调用
+       */
   destory: function() {
     this.domNode.parentNode.removeChild(this.domNode);
   }
