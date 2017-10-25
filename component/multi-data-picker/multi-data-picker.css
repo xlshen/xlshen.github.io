@@ -1,0 +1,23 @@
+*{margin:0;padding:0;border:0;outline:0}
+li{list-style-type:none}
+body,html{height:100%;font:14px/20px "Microsoft YaHei";box-sizing:border-box}
+.tips{font-size:12px;color:#999}
+#selector{text-align:center;display:block;font-size:16px;margin:0 auto;width:100%;line-height:2}
+.set_limit_num{text-indent:1em;line-height:2;height:2em;background-color:#eee}
+.multi-picker{position:absolute;top:0;left:0;right:0;background-color:#fff;height:100%;overflow:hidden}
+.multi-label{position:relative}
+.picker-selected{display:flex;line-height:2.5;}
+.label-for{flex:0 0 6em}
+.selected{flex:1}
+.selected .selected-item{display:inline-block;padding:0 4px}
+.submit{padding:0 4px}
+.picker-container{position:relative;display:flex;height:-webkit-calc(100% - 2.5em);height:-moz-calc(100% - 2.5em);height:-ms-calc(100% - 2.5em);height:calc(100% - 2.5em)}
+.data-level{flex:1;display:flex}
+.picker-container .data-level-one{flex:1;overflow-y:scroll}
+.picker-container .data-level-two{flex:2;overflow-y:scroll}
+.level-one{line-height:2.5;text-indent:2em}
+.level-two{line-height:2.5;text-indent:2em}
+.level-one span{padding-left:6px;color:#f90}
+.level-one.checked{background-color:#7cbf59;color:#fff}
+.level-two.checked{color:#f90}
+.level-two.disabled{color:#ddd}

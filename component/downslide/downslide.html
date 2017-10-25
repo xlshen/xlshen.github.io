@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Downslide run test</title>
+    <link rel="stylesheet" href="downslide.css">
+    <script src="downslide.js" charset="utf-8"></script>
+    <style media="screen">
+      #selectorName, #selectorN{
+        display: block;
+        width: 60%;
+        height: 30px;
+        margin: 20px auto;
+        line-height: 30px;
+        text-indent: 10px;
+        color: #666;
+        font-size: 14px;
+      }
+    </style>
+</head>
+<body>
+    <input type="text" id="selectorName" value="美少女战士" readonly>
+    <input type="hidden" id="selectorId" value="1" readonly>
+    <input type="text" id="selectorN" value="变形金刚" readonly>
+    <input type="hidden" id="selectorI" value="2" readonly>
+    <script type="text/javascript">
+    /**
+         * 调用测试用例
+         */
+var selectedName = document.getElementById("selectorName").value;
+var selectedId = document.getElementById("selectorId").value;
+var targetElement = document.getElementById("selectorName");
+var hiddenElement = document.getElementById("selectorId");
+
+var selectedN = document.getElementById("selectorN").value;
+var selectedI = document.getElementById("selectorI").value;
+var targetE = document.getElementById("selectorN");
+var hiddenE = document.getElementById("selectorI");
+var items = [
+  { name: "美少女战士", id: 1 },
+  { name: "变形金刚", id: 2 },
+  { name: "葫芦娃", id: 3 },
+  { name: "圣斗士星矢", id: 4 },
+  { name: "哪吒", id: 5 }
+];
+var ds = new Downslide(
+  items,
+  selectedName,
+  selectedId,
+  targetElement,
+  hiddenElement
+);
+var ddss = new Downslide(items, selectedN, selectedI, targetE, hiddenE);
+function addEvent(elm, evType, fn, useCapture) {
+  if (elm.addEventListener) {
+    // W3C标准
+    elm.addEventListener(evType, fn, useCapture);
+    return true;
+  } else if (elm.attachEvent) {
+    //IE
+    var r = elm.attachEvent("on" + evType, fn); //IE5+
+    return r;
+  } else {
+    elm["on" + evType] = fn; //DOM事件
+  }
+}
+addEvent(
+  targetElement,
+  "click",
+  function() {
+    ds.show();
+  },
+  false
+);
+addEvent(
+  targetE,
+  "click",
+  function() {
+    ddss.show();
+  },
+  false
+);
+</script>
+</body>
