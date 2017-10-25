@@ -1,0 +1,54 @@
+.container .logo{
+    padding: 20px 0;
+    text-align: center;
+}
+.container .logo img{
+    box-shadow: 0 0 6px #000;
+    border-radius: 50%;    
+}
+.container .logo .sign{
+    text-align: center;
+    font-size: 20px;
+    -webkit-animation-duration: 3s;
+    -moz-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-name: slide;
+    -moz-animation-name: slide;
+    animation-name: slide;
+}
+@-webkit-keyframes slide {
+    from {
+        -webkit-transform: scale(0.5, 0.5);
+        -moz-transform: scale(0.5, 0.5);
+        transform: scale(0.5, 0.5);
+    }
+    to {
+        -webkit-transform: scale(1, 1);
+        -moz-transform: scale(1, 1);
+        transform: scale(1, 1);
+    }
+}
+@-moz-keyframes slide {
+    from {
+        -webkit-transform: scale(0.5, 0.5);
+        -moz-transform: scale(0.5, 0.5);
+        transform: scale(0.5, 0.5);
+    }
+    to {
+        -webkit-transform: scale(1, 1);
+        -moz-transform: scale(1, 1);
+        transform: scale(1, 1);
+    }
+}
+@keyframes slide {
+    from {
+        -webkit-transform: scale(0.5, 0.5);
+        -moz-transform: scale(0.5, 0.5);
+        transform: scale(0.5, 0.5);
+    }
+    to {
+        -webkit-transform: scale(1, 1);
+        -moz-transform: scale(1, 1);
+        transform: scale(1, 1);
+    }
+}
