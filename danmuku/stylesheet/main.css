@@ -1,0 +1,13 @@
+.boomBox {
+  position: relative;
+  height: 200px;
+  background-color: #eee;
+}
+.boomBox > span {
+  position: absolute;
+  left: 100%;
+  display: block;
+  line-height: 1;
+  color: #336688;
+  white-space: nowrap;
+}
